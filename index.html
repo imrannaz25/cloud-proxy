@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Simple Cloud Browser</title>
+  <title>Cloud Browser</title>
 </head>
 <body>
   <h1>Cloud Browser</h1>
@@ -25,14 +25,20 @@
   <script>
     const proxyBase = 'https://18c1-92-45-116-14.ngrok-free.app/proxy?url=';
 
-    function loadPage() {
-      const url = document.getElementById('urlInput').value;
-      if (!url) {
+    function loadPage(url) {
+      const targetUrl = url || document.getElementById('urlInput').value;
+      if (!targetUrl) {
         alert('Please enter a URL!');
         return;
       }
-      document.getElementById('browserFrame').src = proxyBase + encodeURIComponent(url);
+      document.getElementById('browserFrame').src = proxyBase + encodeURIComponent(targetUrl);
     }
+
+    // Auto-load YouTube on page load
+    window.onload = function () {
+      document.getElementById('urlInput').value = 'https://www.youtube.com';
+      loadPage('https://www.youtube.com');
+    };
   </script>
 </body>
 </html>
