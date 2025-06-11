@@ -9,24 +9,26 @@ app.use(cors());
 
 app.get('/proxy', async (req, res) => {
   const targetUrl = req.query.url;
-  if (!targetUrl) return res.status(400).send('Missing URL param');
+  if (!targetUrl) {
+    return res.status(400).send('Missing URL parameter');
+  }
 
   try {
     const response = await fetch(targetUrl, {
       headers: {
         'User-Agent': 'Mozilla/5.0',
-        'ngrok-skip-browser-warning': 'true'
-      }
+        'ngrok-skip-browser-warning': 'true',
+      },
     });
-    const content = await response.text();
 
+    const content = await response.text();
     res.setHeader('ngrok-skip-browser-warning', 'true');
     res.send(content);
   } catch (err) {
-    res.status(500).send('Error fetching target URL');
+    res.status(500).send('Error fetching target URL: ' + err.message);
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`✅ Proxy running on port ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Proxy server running on http://0.0.0.0:${PORT}`);
 });
