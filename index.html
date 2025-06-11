@@ -1,53 +1,124 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Cloud Browser</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #f9f9f9;
-      padding: 2rem;
-      max-width: 900px;
-      margin: auto;
-    }
-    input, button {
-      padding: 0.5rem;
-      font-size: 1rem;
-      margin: 0 0.5rem 0.5rem 0;
-    }
-    iframe {
-      width: 100%;
-      height: 80vh;
-      border: 1px solid #ccc;
-      margin-top: 1rem;
-      background: white;
-    }
-  </style>
-</head>
-<body>
-  <h1>🌐 Cloud Browser</h1>
-  <input id="urlInput" type="text" placeholder="Enter URL (https://example.com)" size="50" />
-  <button onclick="loadPage()">Browse</button>
-  <iframe id="browserFrame" sandbox="allow-scripts allow-same-origin"></iframe>
-
-  <script>
-    const proxyBase = 'https://cloud-proxy-production.up.railway.app/proxy?url=';
-
-    function loadPage() {
-      const url = document.getElementById('urlInput').value.trim();
-      if (!url.startsWith('http')) {
-        alert('⚠️ Please enter a valid URL starting with http or https');
-        return;
-      }
-      document.getElementById('browserFrame').src = proxyBase + encodeURIComponent(url);
-    }
-
-    // Optional: Auto-load YouTube on page load:
-    // window.onload = () => {
-    //   document.getElementById('urlInput').value = 'https://www.youtube.com';
-    //   loadPage();
-    // };
-  </script>
-</body>
+   <head>
+      <meta charset="utf-8">
+      <meta data-hid="description" name="description" content="Watch purified youtube videos with no ads. Just focus"/>
+      <meta data-hid="og:url" property="og:url" content="https://purify-video.github.io"/>
+      <meta data-hid="og:title" property="og:title" content="purify video – watch purified youtube videos with no ads"/>
+      <meta data-hid="og:description" property="og:description" content="Watch purified youtube videos with no ads. Just focus"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
+      <title>purify video – watch purified youtube videos with no ads</title>
+      <script type="text/javascript">
+         function init(){
+         	let params = new URLSearchParams(window.location.search.substr(1));
+         
+         	if(params.has('v')){
+         		purify(params.get('v').match(/(http:|https:)?(\/\/)?(www\.)?(youtube.com|youtu.be)\/(watch|embed)?(\?v=|\/)?(\S+)?/).pop())
+         	}
+         }
+         
+         function purify(key){
+         	document.querySelectorAll('.iframe')[0].style.display = '';
+         	return document.querySelectorAll('iframe')[0].setAttribute('src', 'https://www.youtube-nocookie.com/embed/'+key);
+         }
+      </script>
+      <style type="text/css">
+         * {
+         font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial, sans-serif;
+         }
+         a, a:hover, a:visited{
+         color: #000;
+         }
+         section, footer, header{
+         max-width:1200px;
+         width: 100%;
+         margin: auto;
+         }
+         header, footer{
+         text-align: center;
+         }
+         .iframe{
+         max-width: 1024px;
+         height: 560px;
+         margin:auto;
+         padding: 25px;
+         }
+         input{
+         display: inline;
+         padding: .375rem .75rem;
+         font-size: 1rem;
+         font-weight: 400;
+         line-height: 1.5;
+         color: #212529;
+         background-color: #fff;
+         background-clip: padding-box;
+         border: 1px solid #ced4da;
+         -webkit-appearance: none;
+         -moz-appearance: none;
+         appearance: none;
+         border-radius: .25rem;
+         transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+         }
+         button{
+         display: inline-block;
+         font-weight: 400;
+         line-height: 1.5;
+         color: #212529;
+         text-align: center;
+         text-decoration: none;
+         vertical-align: middle;
+         cursor: pointer;
+         -webkit-user-select: none;
+         -moz-user-select: none;
+         user-select: none;
+         background-color: transparent;
+         border: 1px solid transparent;
+         padding: .375rem .75rem;
+         font-size: 1rem;
+         border-radius: .25rem;
+         font-weight: 600;
+         color: #fff;
+         background-color: #46aae9;
+         border-color: #61a2e7;
+         }
+         section h1{
+         border-bottom: 1px solid #ededed;
+         font-size: 1.9em;
+         }
+         code{
+         background: #f7f7f7;
+         padding: 30px 0;
+         display: block;
+         font-family: Courier New;
+         }
+      </style>
+   </head>
+   <body onload="init()">
+      <header>
+         <h1>purify video</h1>
+         <h2>Watch purified youtube videos with no ads. Just focus</h2>
+         <form method="get" action="/">
+            <input placeholder="Enter youtube URL" type="input" name="v">
+            <button>Purify</button>
+         </form>
+      </header>
+      <section class="iframe" style="display: none">
+         <iframe width="100%" height="100%" src=""
+            frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+      </section>
+      <section>
+         <h1>Are you looking for a way to enhance your YouTube viewing experience?</h1>
+  
+         <p>Look no further! This app offers a clean and minimalistic interface for a distraction-free experience.</p>
+         <p>Whether you're a teacher, professor, student, parent, or organizer, you can use our app to remove unwanted and inappropriate ads, comments, and related videos that may appear on the sidebar. </p>
+         <p>You can ensure that your students only see the content you want them to, while also keeping your own experience free of distractions. </p>
+         
+      </section>
+      <footer>
+         <p>Youtube is the source of content</p>
+         <p><a href="https://github.com/purify-video" target="_blank"> Made with 🖤 in Wrocław</a></p>
+         <p>This website <strong>does not store</strong> any data such as cookies to enable essential site functionality.</p>
+      </footer>
+   </body>
 </html>
