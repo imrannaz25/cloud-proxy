@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cloud Browser</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f9f9f9;
+      padding: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+    input, button {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+    iframe {
+      width: 100%;
+      height: 80vh;
+      margin-top: 1rem;
+      border: 1px solid #ccc;
+      background: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌐 Cloud Browser</h1>
+  <input type="text" id="urlInput" placeholder="Enter full URL (e.g., https://example.com)" size="50" />
+  <button onclick="loadPage()">Browse</button>
+
+  <iframe id="displayFrame" sandbox="allow-scripts allow-forms allow-same-origin"></iframe>
+
+  <script>
+    const proxy = 'https://cloud-proxy-54hi.onrender.com/proxy?url=';
+
+    function loadPage() {
+      const url = document.getElementById('urlInput').value.trim();
+      if (!url.startsWith('http')) {
+        alert('❗ Please enter a full URL starting with http or https.');
+        return;
+      }
+
+      const iframe = document.getElementById('displayFrame');
+      iframe.src = proxy + encodeURIComponent(url);
+    }
+  </script>
+</body>
+</html>
